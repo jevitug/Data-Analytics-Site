@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title> User Management Page</title>
+  <link rel="stylesheet" href="/styles/main.css">
+ 
+
+</head>
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
+        <script src="/__/firebase/7.8.0/firebase-functions.js"></script>
+<script>
+   var firebaseConfig = {
+    apiKey: "AIzaSyCH9xilRB3gdSKL1BaXDeeV3xAf3DoC4ZU",
+    authDomain: "cse135-hw3-3ed39.firebaseapp.com",
+    databaseURL: "https://cse135-hw3-3ed39.firebaseio.com",
+    projectId: "cse135-hw3-3ed39",
+    storageBucket: "cse135-hw3-3ed39.appspot.com",
+    messagingSenderId: "490687426483",
+    appId: "1:490687426483:web:b0feafaa08dfb8581365c6"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var functions = firebase.functions();
+  var check = functions.httpsCallable('check');
+  check()
+    .then(function(resp) {
+      console.log(resp);
+      if (!resp){
+        window.alert('The user is not an admin.');
+        window.location.href='/login';
+      }
+  })
+  .catch(function(error) {
+    var code = error.code;
+    var message = error.message;
+    console.log(message); 
+    window.alert(message);
+    window.location.href='/login';
+  });
+
+</script>
+        <table>
+            <caption>User Management</caption>
+            <colgroup>
+                <col span="8" style="background-color:yellow;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>USER</th>
+                    <th>NAME</th>
+                    <th>ROLE</th>
+                    <th>PERMISSIONS</th> 
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                   <td>USER 1</td>
+                   <td class="user1Name">Name</td>
+                   <td class="class">role</td> 
+                   <td id="user1Edit"><button>EDIT</button> </td>
+                   <td id ="user1Delete"><button>DELETE</button></td>    
+                </tr>
+                <br/>
+                <tr>
+                   <td>USER 2</td>
+                   <td class="user2Name"</td>
+                   <td class="class">role</td> 
+                   <td id="user2Edit"><button>EDIT</button> </td>
+                   <td id ="user2Delete"><button>DELETE</button></td>  
+                </tr>
+                <tr>
+                   <td>USER 3</td>
+                   <td class="user3Name">Name</td>
+                   <td class="class">role</td> 
+                   <td id="user3Edit"><button>EDIT</button> </td>
+                   <td id ="user3Delete"><button>DELETE</button></td>    
+                </tr>
+                <tr>
+                   <td>USER 4</td>
+                   <td class="user4Name">Name</td>
+                   <td class="class">role</td> 
+                   <td id="user4Edit"><button>EDIT</button> </td>
+                   <td id ="user4Delete"><button>DELETE</button></td>   
+                </tr>
+                <tr>
+                   <td>USER 5</td>
+                   <td class="user5Name">Name</td>
+                   <td class="class">role</td> 
+                   <td id="user5Edit"><button>EDIT</button> </td>
+                   <td id="user5Delete"><button>DELETE</button></td>  
+                </tr>
+                <tr>
+                   <td>USER 6</td>
+                   <td class="user6Name">Name</td>
+                   <td class="class">role</td> 
+                   <td id="user6Edit"><button>EDIT</button> </td>
+                   <td id="user6Delete"><button>DELETE</button></td>  
+                </tr>
+                <tr>
+                   <td>USER 7</td>
+                   <td class="user7Name">Name</td>
+                   <td class="class">role</td> 
+                   <td id="user7Edit"><button>EDIT</button> </td>
+                   <td id="user7Delete"><button>DELETE</button></td>  
+                </tr>
+                <tr>
+                   <td>USER 8</td>
+                   <td class="user8Name">Name</td>
+                   <td class="class">role</td> 
+                   <td id="user8Edit"><button>EDIT</button> </td>
+                   <td id="user8Delete"><button>DELETE</button></td>  
+                </tr>
+                
+            </tbody>
+        </table>
+        <br>
+
+
+</body>
+
+</html>

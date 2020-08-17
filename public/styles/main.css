@@ -1,0 +1,16 @@
+header.page-header {
+    background: no-repeat left/cover url(/assets/header.jpeg);
+    display: flex;
+
+    align-items: center;
+    color: #fff;
+    text-shadow: #000 0 0 .2em;
+}
+header.page-header > h1 {
+
+    margin: 2%;
+}
+
+.externals-body {
+    font-family: "Open Sans", sans-serif;
+}

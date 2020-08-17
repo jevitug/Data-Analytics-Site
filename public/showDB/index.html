@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Show Database</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <!--Load the AJAX API-->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+
+      // Create the data table.
+      
+      var cookData = google.visualization.arrayToDataTable([
+          ['User Cookies', 'User Cookies On or Off'],
+          ['On', 82.7],
+          ['Off', 17.3],
+      ]);
+
+      // Set chart options
+      var cookOptions = {'title':'Cookies',
+      'width':550, 'height':400};
+
+      // Instantiate and draw our chart, passing in some options.
+      //var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      var cookChart = new google.visualization.PieChart(document.getElementById('chart_div_cookie'));
+      cookChart.draw(cookData, cookOptions);
+
+      //index, images, form, table and lists, externals, showDb
+      var pageData = google.visualization.arrayToDataTable([
+        ['Page Visitations', 'Page Visitation Percentages'],
+        ['Index', 67.8],
+        ['Images', 3.2],
+        ['Form', 1.2],
+        ['Table and Lists', 0.6],
+        ['Externals', 1.6],
+        ['ShowDB', 25.6],
+      ])
+
+      // Set chart options
+      var pageOptions = {'title':'Cookies',
+      'width':550, 'height':400};
+
+      // Instantiate and draw our chart, passing in some options.
+      //var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      var pageChart = new google.visualization.PieChart(document.getElementById('chart_div_page'));
+      pageChart.draw(pageData, pageOptions);      
+    }
+  </script>
+  <script src="https://cdn.zinggrid.com/zinggrid.min.js" defer></script>
+  
+</head>
+<body>
+  
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
+        <nav>
+ 
+          <a href="/logout">Log Out</a>
+      </nav>
+
+  <h1> ShowDB </h1>  
+
+
+
+</body>
+
+<zing-grid
+caption="Performance Data"
+sorter
+search
+pager
+page-size=5
+page-size-options="5,10,15">
+</zing-grid>
+
+<!--Div that will hold the pie chart-->
+<div id="chart_div_cookie"></div>
+<div id="chart_div_page"></div>
+
+<script>
+
+   //change this config to match the one you are using.
+   
+    var firebaseConfig = {
+    apiKey: "AIzaSyC0eMpXzK1jCVrkNzNtWpQ_GN_W7FGxU5E",
+    authDomain: "hw3-backend-8f841.firebaseapp.com",
+    databaseURL: "https://hw3-backend-8f841.firebaseio.com",
+    projectId: "hw3-backend-8f841",
+    storageBucket: "hw3-backend-8f841.appspot.com",
+    messagingSenderId: "1046643514983",
+    appId: "1:1046643514983:web:2cac1d18fe7eebe57d3ec2"
+  };
+
+  var ul = document.querySelector("ul");
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+ var user = firebase.auth().currentUser;     
+if (user) {
+  console.log("WOOO");
+} else {
+  window.location="/login";
+}
+
+    db.collection('data').get().then((snapshot) => {
+      snapshot.forEach(function(child){
+        
+        //console.log(child.data());
+        var valCook = child.data();
+        var listItem = document.createElement("li");
+        //display static data
+        /*if(valCook.static){
+          if(valCook.static.events){
+            console.log("hello");
+          }
+          var stringObj = JSON.stringify(valCook);
+          //listItem.innerHTML = stringObj;
+          const grid = document.getElementById("staticData");
+          grid.setData(valCook.static);
+          //console.log(stringObj);
+          //listItem.innerHTML = valCook;
+          //document.getElementById("staticData").appendChild(listItem);
+        }*/
+        //display performance data
+        if(valCook.performance){
+          var stringObj = JSON.stringify(valCook);
+          
+          //listItem.innerHTML = stringObj;
+          //listItem.innerHTML = valCook;
+          //document.getElementById("perfData").appendChild(listItem);
+          
+          const grid = document.querySelector('zing-grid');
+          grid.setData(valCook);
+          
+          console.log(JSON.stringify(child));
+          //console.log(stringObj);
+          //grid.setAttribute("data", stringObj);
+        }
+      })
+    })
+    
+  </script>
+    <!--Make child of ul (li) when appending items to the list-->
+  </body>
+</html>

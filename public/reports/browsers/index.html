@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Show Database</title>
+  <link rel="stylesheet" href="/styles/main.css">
+
+</head>
+<body>
+
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
+  
+  <nav>
+    <a href="/logout">Log Out</a>
+  </nav>
+
+  <h1> Reports </h1>  
+
+  <section id= "speed" >
+    <h3>Static Data</h3>
+    <ul id="staticData"></ul>
+  </section>
+
+  <section id= "browsers" >
+    <h3>Performance Data</h3>
+    <ul id="perfData"></ul>
+  </section>
+
+</body>
+
+
+
+<script>
+
+   //change this config to match the one you are using.
+   
+    var firebaseConfig = {
+    apiKey: "AIzaSyC0eMpXzK1jCVrkNzNtWpQ_GN_W7FGxU5E",
+    authDomain: "hw3-backend-8f841.firebaseapp.com",
+    databaseURL: "https://hw3-backend-8f841.firebaseio.com",
+    projectId: "hw3-backend-8f841",
+    storageBucket: "hw3-backend-8f841.appspot.com",
+    messagingSenderId: "1046643514983",
+    appId: "1:1046643514983:web:2cac1d18fe7eebe57d3ec2"
+  };
+
+  var ul = document.querySelector("ul");
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+/*
+ var user = firebase.auth().currentUser;     
+
+if (user) {
+  console.log(user);
+} else {
+  window.location="/login";
+}
+*/
+    db.collection('sessions').get().then((snapshot) => {
+      snapshot.forEach(function (child) {
+        var entry= child.id;
+
+        //get all static values
+        var cookie = child.data().cookies;
+        var lang = child.data().language;
+        var mHeight = child.data().maxHeight;
+        var mWidth = child.data().maxWidth;
+        var url = child.data().url;
+        var userAg = child.data().userAgent;
+        var wHeight = child.data().windowHeight;
+        var wWidth = child.data().windowWidth; 
+        var valCook = child.data().value;
+
+        //var link = document.createElement("a");
+        //link.href = window.origin + "/viz?" + i;
+        var listItem = document.createElement("li");
+        //listItem.textContent = entry;
+
+        /*listItem.innerHTML = "Cookies: "+cookie+" Language: "+lang+
+                              " maxHeight: "+mHeight+" maxWidth: "+mWidth+
+                              " url: "+url+" userAgent: "+userAg+
+                              " windowHeight: "+wHeight+"windowWidth: "+wWidth;*/
+        
+        listItem.innerHTML = "Cookie is " + valCook;
+        //link.appendChild(listItem);
+        //ul.appendChild(link);
+
+        //ul.appendChild(listItem);
+          document.getElementById("sessionCookie").appendChild(listItem);
+        
+      })
+    })
+
+    //user cookies
+    db.collection('Users').get().then((snapshot) => {
+      snapshot.forEach(function (child) {
+        var entry = child.id;
+        var valCook = child.data().value;
+        var listItem = document.createElement("li");
+        listItem.innerHTML = "User Cookie is " + valCook;
+       
+        document.getElementById("userCookie").appendChild(listItem);
+      })
+    })
+
+    db.collection('data').get().then((snapshot) => {
+      snapshot.forEach(function(child){
+      
+        //console.log(child.data());
+        var valCook = child.data();
+        var listItem = document.createElement("li");
+        //display static data
+        if(valCook.static){
+
+          if(valCook.static.events){
+
+            console.log("hello");
+          }
+
+          var stringObj = JSON.stringify(valCook);
+          listItem.innerHTML = stringObj;
+          //console.log(stringObj);
+          //listItem.innerHTML = valCook;
+          document.getElementById("staticData").appendChild(listItem);
+        }
+        //display performance data
+        if(valCook.performance){
+          var stringObj = JSON.stringify(valCook);
+          listItem.innerHTML = stringObj;
+          //listItem.innerHTML = valCook;
+          document.getElementById("perfData").appendChild(listItem);
+        }
+      })
+    })
+    
+  </script>
+
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Jason Hong</title>
+  <link rel="stylesheet" href="/styles/main.css">
+
+</head>
+<body>
+<nav>
+  <a href="/">Home</a> |
+  <a href="/images/">Images</a> |
+  <a href="/form/">Form</a> |
+  <a href="/table_and_lists/">Table and Lists</a> |
+  <a href="/externals/">Externals |</a>
+  <a href="/reportertest/">Reportertest</a> |
+  <a href="/userManage.html">User Manage</a>
+</nav>
+
+  <h1> Reportertest </h1>  
+  
+  <ul>
+
+  </ul>
+
+</body>
+
+  <script>
+
+    var ul = document.querySelector("ul");
+
+    for (var i = 0; i < localStorage.length; i++) {
+      var entry = localStorage.key(i);
+
+      var link = document.createElement("a");
+      link.href = window.origin + "/viz?" + i;
+      var listItem = document.createElement("li");
+      listItem.textContent = entry;
+
+      link.appendChild(listItem);
+      ul.appendChild(link);
+    }
+  </script>
+
+    
+</html>

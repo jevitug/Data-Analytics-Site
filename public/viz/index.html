@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Jason Hong</title>
+  <link rel="stylesheet" href="/styles/main.css">
+
+</head>
+<body>
+<nav>
+  <a href="/">Home</a> |
+  <a href="/images/">Images</a> |
+  <a href="/form/">Form</a> |
+  <a href="/table_and_lists/">Table and Lists</a> |
+  <a href="/externals/">Externals |</a>
+  <a href="/reportertest/">Reportertest</a>
+</nav>
+
+<h2> Static Data </h2>
+<table style="width:100%">
+  <tr>
+    <th>User-Agent</th>
+    <th>Language</th> 
+    <th>Cookies</th>
+    <th>Javascript</th>
+    <th>Images</th>
+    <th>CSS</th>
+    <th>Available Screen Size</th>
+    <th>Window Size</th>
+    <th>Effective connection</th>
+  </tr>
+</table>
+
+<h2> Performance</h2>
+<table style="width:100%">
+  <tr>
+    <th>Event</th>
+    <th>Start</th>
+    <th>End</th> 
+    <th>Time Taken</th>
+  </tr>
+
+
+</table>
+
+<h2> Events </h2>
+<div id="events" style="overflow:auto; width:400px;height:400px;">
+
+</div>
+
+<button onclick="clearEntry()">Purge Entry</button>
+<button onclick="clearAll()">Purge All</button>
+</body>
+
+  <script>
+    var urlParam = (window.location.search).slice(-1);
+    var entry = localStorage.getItem(localStorage.key(urlParam));
+    var static = JSON.parse(entry)[0];
+    var performance = JSON.parse(entry)[1];
+    var events = JSON.parse(entry)[2];
+      console.log(performance);
+    table = document.getElementsByTagName("table").item(0);
+    row=document.createElement("tr");
+    agent = document.createElement("td");
+    language = document.createElement("td");
+    cookies = document.createElement("td");
+    js = document.createElement("td");
+    images = document.createElement("td");
+    css = document.createElement("td");
+    screenSize = document.createElement("td");
+    windowSize = document.createElement("td");
+    connection = document.createElement("td");
+
+    agent.appendChild(document.createTextNode(static.userAgent));
+    language.appendChild(document.createTextNode(static.language));
+    cookies.appendChild(document.createTextNode(static.cookies));
+    //js.appendChild(document.createTextNode());
+    //images.appendChild(document.createTextNode());
+    //css.appendChild(document.createTextNode());
+    screenSize.appendChild(document.createTextNode(static.maxWidth + "x" + static.maxHeight));
+    windowSize.appendChild(document.createTextNode(static.windowWidth + "x" + static.windowHeight));
+    //connection.appendChild(document.createTextNode(static.connection));
+
+    row.appendChild(agent);
+    row.appendChild(language);
+    row.appendChild(cookies);
+    row.appendChild(js);
+    row.appendChild(images);
+    row.appendChild(css);
+    row.appendChild(screenSize);
+    row.appendChild(windowSize);
+    row.appendChild(connection);
+    table.append(row);
+
+    table = document.getElementsByTagName("table").item(1);
+
+    row = document.createElement("tr");
+    event = document.createElement("td");
+    event.appendChild(document.createTextNode("Connect"));
+    start = document.createElement("td");
+    start.appendChild(document.createTextNode(performance.connectStart));
+    end = document.createElement("td");
+    end.appendChild(document.createTextNode(performance.connectEnd));
+    total = document.createElement("td");
+    total.appendChild(document.createTextNode(performance.connectEnd - performance.connectStart));
+    row.append(event);
+    row.append(start);
+    row.append(end);
+    row.append(total);
+    table.append(row);
+
+    row = document.createElement("tr");
+    event = document.createElement("td");
+    event.appendChild(document.createTextNode("DOM content"));
+    start = document.createElement("td");
+    start.appendChild(document.createTextNode(performance.domContentLoadedEventStart));
+    end = document.createElement("td");
+    end.appendChild(document.createTextNode(performance.domContentLoadedEventEnd));
+    total = document.createElement("td");
+    total.appendChild(document.createTextNode(performance.domComplete));
+    row.append(event);
+    row.append(start);
+    row.append(end);
+    row.append(total);
+    table.append(row);
+
+    row = document.createElement("tr");
+    event = document.createElement("td");
+    event.appendChild(document.createTextNode("Response"));
+    start = document.createElement("td");
+    start.appendChild(document.createTextNode(performance.responseStart));
+    end = document.createElement("td");
+    end.appendChild(document.createTextNode(performance.responseEnd));
+    total = document.createElement("td");
+    total.appendChild(document.createTextNode(performance.responseEnd - performance.responseStart));
+    row.append(event);
+    row.append(start);
+    row.append(end);
+    row.append(total);
+    table.append(row);
+
+    row = document.createElement("tr");
+    event = document.createElement("td");
+    event.appendChild(document.createTextNode("Domain Lookup"));
+    start = document.createElement("td");
+    start.appendChild(document.createTextNode(performance.domainLookupStart));
+    end = document.createElement("td");
+    end.appendChild(document.createTextNode(performance.domainLookupEnd));
+    total = document.createElement("td");
+    total.appendChild(document.createTextNode(performance.domainLookupEnd - performance.domainLookupStart));
+    row.append(event);
+    row.append(start);
+    row.append(end);
+    row.append(total);
+    table.append(row);
+
+    row = document.createElement("tr");
+    event = document.createElement("td");
+    event.appendChild(document.createTextNode("Unload"));
+    start = document.createElement("td");
+    start.appendChild(document.createTextNode(performance.unloadEventStart));
+    end = document.createElement("td");
+    end.appendChild(document.createTextNode(performance.unloadEventEnd));
+    total = document.createElement("td");
+    total.appendChild(document.createTextNode(performance.unloadEventEnd - performance.unloadEventStart));
+    row.append(event);
+    row.append(start);
+    row.append(end);
+    row.append(total);
+    table.append(row);
+
+    eventsDiv = document.getElementsByTagName("div").item(0);
+    eventsDiv.innerHTML = events;
+
+    function clearEntry(){
+      var confirmDelete = confirm("Delete this Entry?");  
+      if(confirmDelete){
+        localStorage.removeItem(localStorage.key(urlParam));
+      }
+      
+      
+    }
+
+    function clearAll(){
+      var confirmDelete = confirm("Delete all entries?")
+      if(confirmDelete){
+        localStorage.clear();
+      }
+    }
+
+  </script>
+
+    
+</html>

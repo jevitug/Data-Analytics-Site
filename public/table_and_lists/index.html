@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Table and Lists</title>
+        <style>
+            table, th, td {border: 1px solid black;}
+            .none{background-color:green;}
+            .work{background-color:orange;}
+            .class{background-color:blue;}
+            .fun{background-color:purple;}
+            #checkCSS{margin-top:100px; display:none;}
+        </style>
+        <script src="../scripts/tracker.js"></script>
+    </head>
+    <body>
+        <nav>
+          <a href="/">Home</a> |
+            <a href="/images/">Images</a> |
+            <a href="/form/">Form</a> |
+            <a href="/table_and_lists/">Table and Lists</a> |
+            <a href="/externals/">Externals |</a>
+          <a href="/reportertest/">Reportertest</a> |
+            <a href="/userManage.html">User Manage</a>
+        </nav>
+
+        <table>
+            <caption>My Schedule</caption>
+            <colgroup>
+                <col span="8" style="background-color:yellow;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Sunday</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                   <td>8:00am</td>
+                   <td class="fun" rowspan="3">Liverpool Game</td>
+                   <td class="class">CSE135</td>
+                   <td class="none">&nbsp;</td>
+                   <td class="class">CSE135</td>
+                   <td class="none">&nbsp;</td>
+                   <td class="class">CSE135</td>
+                   <td class="none">&nbsp;</td>
+                </tr>
+                <tr>
+                   <td>9:00am</td>
+                   <td class="none" rowspan="7">&nbsp;</td>
+                   <td class="class" rowspan="2">ECE141A</td>
+                   <td class="none" rowspan="6">&nbsp;</td>
+                   <td class="class" rowspan="2">ECE141A</td>
+                   <td class="none" colspan="2" rowspan="12">&nbsp;</td>
+                   
+                </tr>
+                <tr>
+                    <td>10:00am</td>
+
+                </tr>
+                <tr>
+                    <td>11:00am</td>
+                    <td class="none">&nbsp;</td>
+                    <td class="class" rowspan="2">PSYC161</td>
+                    <td class="none" rowspan="8">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>12:00pm</td>
+                    <td class="fun" rowspan="9">Football!!</td>
+                </tr>
+                <tr>
+                    <td>1:00pm</td>
+                    <td class="none" rowspan="2">&nbsp;</td>
+                    
+                </tr>
+                <tr>
+                    <td>2:00pm</td>
+                </tr>
+                <tr>
+                    <td>3:00pm</td>
+                    <td class="work" rowspan="3">Work</td>
+                    <td class="work" rowspan="3">Work</td>
+                </tr>
+                <tr>
+                    <td>4:00pm</td>
+                    <td class="class">ECE141A Lab</td>
+                </tr>
+                <tr>
+                    <td>5:00pm</td>
+                    <td class="none" rowspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>6:00pm</td>
+                    <td class="none" rowspan="3">&nbsp;</td>
+                    <td class="none" rowspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>7:00pm</td>
+                    <td class="work" rowspan="2">Work</td>
+                </tr>
+                <tr>
+                    <td>8:00pm</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+
+        <ul>
+            <li>Eat</li>
+            <li>Workout</li>
+            <li>Walk Dog</li>
+            <li>Sleep</li>
+        </ul>
+
+        <ol>
+            <li>Walk Dog</li>
+            <li>Go To Class</li>
+            <li>Workout</li>
+            <li>Go To Work</li>
+            <li>Eat</li>
+            <li>Walk Dog (again)</li>
+            <li>Sleep</li>
+        </ol>
+
+        <dl>
+            <dt>Jared</dt>
+            <dd>Computer Engineering Major</dd>
+            <dt>Peanut</dt>
+            <dd>Cattle-Dog-Shepherd Mix</dd>
+        </dl>
+        <nav>
+            <a href="./index.html">Home</a> |
+            <a href="./images.html">Images</a> |
+            <a href="./form.html">Form</a> |
+            <a href="./table_and_lists.html">Table and Lists</a> |
+            <a href="./externals.html">Externals</a> 
+            <a href="./reportertest.html">Reporter Test</a>
+        </nav>
+
+    </body>
+</html>
